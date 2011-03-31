@@ -1,0 +1,19 @@
+SOA                     trial type
+Go Correct              correct count
+Go Corr Rt              correct pct
+Go Err                  ommision error count
+NoGo Correct            ommision correct count
+NoGo Err                assertion error count
+NoGo Err RT             assertion error pct
+Vert Go Correct         vert correct count
+Vert Go Corr RT         vert correct pct
+Vert Go Err             vert ommision error count
+Vert NoGo Correct       vert ommision correct count
+Vert NoGo Err           vert assertion error count
+Vert NoGo Err Rt        vert assertion error pct
+Horz Go Correct         horz correct count
+Horz Go Corr RT         horz correct pct
+Horz Go Err             horz ommision error pct
+Horz NoGo Correct       horz ommision correct count
+Horz NoGo Err           horz assertion error count
+Horz NoGo Err RT        horz assertion error pct

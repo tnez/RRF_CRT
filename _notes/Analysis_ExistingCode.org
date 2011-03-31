@@ -1,0 +1,184 @@
+
+* applicationDidFinishLaunching
+  - create timers and logs
+  - recover from crash if needed
+  - else, read startup info
+  - setup new run
+  - create initial header info
+  - log run headers
+  - set text field
+  - make the view the first responder
+** calls
+   - attemptCrashRecovery
+   - readStartupInfo
+   - setupNewRun
+** what I need to do
+   - define recovery conditions ---> needsToRecover
+   - define recovery procedure ---> recover
+   - setup new run ---> setup
+   - initialize header info ---> ?
+
+* applicationWillFinishLaunching
+  - creates shared library
+  - loads view in full screen
+** calls
+   - nothing
+** what I need to do
+   - nothing
+  
+* sharedAppController
+  - return this
+** calls
+   - nothing
+** what I need to do
+   - check supporting classes and resolve calls to this function in a
+     simpler manner
+
+* userDidInputCharacters
+  - process user input and show results
+** calls
+   - applicationState
+   - showResults
+** what I need to do
+   - copy directly
+
+* beginNextTrial
+  - begin next trial
+** calls
+   - setApplicationState
+   - beginBreak
+   - terminate
+** what I need to do
+   - copy directly
+   - resolve reference to theWindow
+
+* layoutTrials
+  - create and layout trials, duh
+** calls
+   - none
+** what I need to do
+   - copy directly
+
+* userTimeOut
+  - n/a
+** calls
+   - showResults
+** what I need to do
+   - copy directly
+
+* displayBlankScreenBeforeEmptyRectangle
+  - make view first responder
+  - set image view hidden
+  - set text field hidden
+  - update application state
+** calls
+   - setApplicationState
+** what I need to do
+   - copy directly
+   - resolve reference to theWindow
+
+* displayBlankRectangle
+  - make view first responder
+  - update image
+  - set image view enabled
+  - un-hide text view
+  - update application state
+** calls
+   - setApplicationState
+** what I need to do
+   - copy directly
+   - resolve reference to theWindow
+
+* displayFullRectangle
+  - make view first responder
+  - update application state
+  - update image
+  - queue userTimeOut
+** calls
+   - setApplicationState
+** what I need to do
+   - copy directly
+   - resolve reference to theWindow
+
+* showResults
+  - make view the first responder
+  - update application state
+  - increment trials
+  - initialize metrics
+  - log event
+  - queue next trial begin
+** calls
+   - logCurrentRunHeader
+** what I need to do
+   - copy directly
+   - adapt logging method
+
+* terminate
+  - remove crash recovery file
+  - terminate
+** calls
+   - none
+** what I need to do
+   - remove
+
+* beginBreak
+  - update prompt
+  - hide image view
+  - queue give break warning
+** calls
+   - layout trials
+** what I need to do
+   - copy directly
+
+* giveBreakWarning
+  - update prompt
+  - queue next trial
+** calls
+   - none
+** what I need to do
+   - copy directly
+
+* readStartupInfo
+  - set study day
+  - set subject ID
+** calls
+   - terminate
+** what I need to do
+   - remove
+
+* attemptCrashRecovery
+  - determine number of each trial type
+  - ...etc
+** calls
+   - n/a (this will be refactored)
+** what I need to do
+   - refactor based on setup requirements and recovery type
+
+* setupNewRun
+  - data file parsing - should be ignored
+  - log current run header
+  - log run raw data header
+** calls
+   - setCurrentRunHeader
+   - logCurrentRunHeader
+   - logRunRawDataheader
+** what I need to do
+   - remove and verify
+   - review header generation methods
+
+* logRunRawDataHeader
+  - 
+** calls
+   - x
+** what I need to do
+   - figure out which header this is and how to duplicate
+
+* logCurrentRunHeader
+  - get run header and queue logging
+** calls
+   - getCurrentRunHeader
+** what I need to do
+   - figure out when this is called and duplicate
+
+* getCurrentRunHeader
+  - 
