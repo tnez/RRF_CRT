@@ -1,0 +1,19 @@
+//
+// Prefix header for all source files of the 'CRT' target in the 'CRT' project.
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
+
+/**
+ Macros for logging functions conditional upon debug vs. production
+ ELog: informative log that will occur even in production builds
+ DLog: informative log that will only occur in debug builds
+ */
+#define ELog(...) NSLog(@"%s %@",__PRETTY_FUNCTION__,[NSString stringWithFormat:__VA_ARGS__])
+#ifdef DEBUG 
+  #define DLog(...) NSLog(@"%s %@",__PRETTY_FUNCTION__,[NSString stringWithFormat:__VA_ARGS__])
+#else
+  #define DLog(...) do { } while(0)
+#endif
