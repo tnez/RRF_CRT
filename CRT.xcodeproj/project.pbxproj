@@ -30,6 +30,22 @@
 		404B5F2D12524A5600437416 /* RRFCRTManifest.plist in Resources */ = {isa = PBXBuildFile; fileRef = 404B5F2C12524A5600437416 /* RRFCRTManifest.plist */; };
 		404B5F2E12524A5600437416 /* RRFCRTManifest.plist in Resources */ = {isa = PBXBuildFile; fileRef = 404B5F2C12524A5600437416 /* RRFCRTManifest.plist */; };
 		4063B2B512551F490096BFE1 /* RRFCRT.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D5B49B6048680CD000E48DA /* RRFCRT.bundle */; };
+		409AB3D91344B50B005D2E21 /* CRTCrossHair.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 409AB3D21344B50B005D2E21 /* CRTCrossHair.PNG */; };
+		409AB3DA1344B50B005D2E21 /* horizontalBlue.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 409AB3D31344B50B005D2E21 /* horizontalBlue.PNG */; };
+		409AB3DB1344B50B005D2E21 /* horizontalClear.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 409AB3D41344B50B005D2E21 /* horizontalClear.PNG */; };
+		409AB3DC1344B50B005D2E21 /* horizontalGreen.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 409AB3D51344B50B005D2E21 /* horizontalGreen.PNG */; };
+		409AB3DD1344B50B005D2E21 /* verticalBlue.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 409AB3D61344B50B005D2E21 /* verticalBlue.PNG */; };
+		409AB3DE1344B50B005D2E21 /* verticalClear.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 409AB3D71344B50B005D2E21 /* verticalClear.PNG */; };
+		409AB3DF1344B50B005D2E21 /* verticalGreen.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 409AB3D81344B50B005D2E21 /* verticalGreen.PNG */; };
+		409AB3E01344B50B005D2E21 /* CRTCrossHair.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 409AB3D21344B50B005D2E21 /* CRTCrossHair.PNG */; };
+		409AB3E11344B50B005D2E21 /* horizontalBlue.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 409AB3D31344B50B005D2E21 /* horizontalBlue.PNG */; };
+		409AB3E21344B50B005D2E21 /* horizontalClear.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 409AB3D41344B50B005D2E21 /* horizontalClear.PNG */; };
+		409AB3E31344B50B005D2E21 /* horizontalGreen.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 409AB3D51344B50B005D2E21 /* horizontalGreen.PNG */; };
+		409AB3E41344B50B005D2E21 /* verticalBlue.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 409AB3D61344B50B005D2E21 /* verticalBlue.PNG */; };
+		409AB3E51344B50B005D2E21 /* verticalClear.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 409AB3D71344B50B005D2E21 /* verticalClear.PNG */; };
+		409AB3E61344B50B005D2E21 /* verticalGreen.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 409AB3D81344B50B005D2E21 /* verticalGreen.PNG */; };
+		409AB3EB1344B542005D2E21 /* CRTResponderImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 409AB3E81344B542005D2E21 /* CRTResponderImageView.m */; };
+		409AB3EF1344B56C005D2E21 /* CRTTrial.m in Sources */ = {isa = PBXBuildFile; fileRef = 409AB3EA1344B542005D2E21 /* CRTTrial.m */; };
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -103,6 +119,17 @@
 		404B5ED41250B59C00437416 /* Mock_AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Mock_AppDelegate.m; sourceTree = "<group>"; };
 		404B5ED51250B59C00437416 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		404B5F2C12524A5600437416 /* RRFCRTManifest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RRFCRTManifest.plist; sourceTree = "<group>"; };
+		409AB3D21344B50B005D2E21 /* CRTCrossHair.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CRTCrossHair.PNG; sourceTree = "<group>"; };
+		409AB3D31344B50B005D2E21 /* horizontalBlue.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = horizontalBlue.PNG; sourceTree = "<group>"; };
+		409AB3D41344B50B005D2E21 /* horizontalClear.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = horizontalClear.PNG; sourceTree = "<group>"; };
+		409AB3D51344B50B005D2E21 /* horizontalGreen.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = horizontalGreen.PNG; sourceTree = "<group>"; };
+		409AB3D61344B50B005D2E21 /* verticalBlue.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = verticalBlue.PNG; sourceTree = "<group>"; };
+		409AB3D71344B50B005D2E21 /* verticalClear.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = verticalClear.PNG; sourceTree = "<group>"; };
+		409AB3D81344B50B005D2E21 /* verticalGreen.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = verticalGreen.PNG; sourceTree = "<group>"; };
+		409AB3E71344B542005D2E21 /* CRTResponderImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRTResponderImageView.h; sourceTree = "<group>"; };
+		409AB3E81344B542005D2E21 /* CRTResponderImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRTResponderImageView.m; sourceTree = "<group>"; };
+		409AB3E91344B542005D2E21 /* CRTTrial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRTTrial.h; sourceTree = "<group>"; };
+		409AB3EA1344B542005D2E21 /* CRTTrial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRTTrial.m; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* RRFCRT.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RRFCRT.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2F7E65807B2D6F200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
@@ -154,6 +181,13 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				409AB3D21344B50B005D2E21 /* CRTCrossHair.PNG */,
+				409AB3D31344B50B005D2E21 /* horizontalBlue.PNG */,
+				409AB3D41344B50B005D2E21 /* horizontalClear.PNG */,
+				409AB3D51344B50B005D2E21 /* horizontalGreen.PNG */,
+				409AB3D61344B50B005D2E21 /* verticalBlue.PNG */,
+				409AB3D71344B50B005D2E21 /* verticalClear.PNG */,
+				409AB3D81344B50B005D2E21 /* verticalGreen.PNG */,
 				404B5F2C12524A5600437416 /* RRFCRTManifest.plist */,
 				4034000C122D57F9003CABA9 /* RRFCRTMainNib.xib */,
 				8D5B49B7048680CD000E48DA /* Info.plist */,
@@ -165,6 +199,10 @@
 		08FB77AFFE84173DC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				409AB3E71344B542005D2E21 /* CRTResponderImageView.h */,
+				409AB3E81344B542005D2E21 /* CRTResponderImageView.m */,
+				409AB3E91344B542005D2E21 /* CRTTrial.h */,
+				409AB3EA1344B542005D2E21 /* CRTTrial.m */,
 				40340001122D574E003CABA9 /* RRFCRTController.h */,
 				40340002122D574E003CABA9 /* RRFCRTController.m */,
 			);
@@ -317,6 +355,13 @@
 				404B5EE41250B8C500437416 /* NumberOption.xib in Resources */,
 				404B5EE51250B8C500437416 /* BooleanOption.xib in Resources */,
 				404B5F2E12524A5600437416 /* RRFCRTManifest.plist in Resources */,
+				409AB3E01344B50B005D2E21 /* CRTCrossHair.PNG in Resources */,
+				409AB3E11344B50B005D2E21 /* horizontalBlue.PNG in Resources */,
+				409AB3E21344B50B005D2E21 /* horizontalClear.PNG in Resources */,
+				409AB3E31344B50B005D2E21 /* horizontalGreen.PNG in Resources */,
+				409AB3E41344B50B005D2E21 /* verticalBlue.PNG in Resources */,
+				409AB3E51344B50B005D2E21 /* verticalClear.PNG in Resources */,
+				409AB3E61344B50B005D2E21 /* verticalGreen.PNG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +372,13 @@
 				8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */,
 				4034000D122D57F9003CABA9 /* RRFCRTMainNib.xib in Resources */,
 				404B5F2D12524A5600437416 /* RRFCRTManifest.plist in Resources */,
+				409AB3D91344B50B005D2E21 /* CRTCrossHair.PNG in Resources */,
+				409AB3DA1344B50B005D2E21 /* horizontalBlue.PNG in Resources */,
+				409AB3DB1344B50B005D2E21 /* horizontalClear.PNG in Resources */,
+				409AB3DC1344B50B005D2E21 /* horizontalGreen.PNG in Resources */,
+				409AB3DD1344B50B005D2E21 /* verticalBlue.PNG in Resources */,
+				409AB3DE1344B50B005D2E21 /* verticalClear.PNG in Resources */,
+				409AB3DF1344B50B005D2E21 /* verticalGreen.PNG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,6 +406,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				40340003122D574E003CABA9 /* RRFCRTController.m in Sources */,
+				409AB3EB1344B542005D2E21 /* CRTResponderImageView.m in Sources */,
+				409AB3EF1344B56C005D2E21 /* CRTTrial.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
