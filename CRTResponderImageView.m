@@ -7,14 +7,14 @@
 //
 
 #import "CRTResponderImageView.h"
-#import "CRTAppController.h"
+#import "RRFCRTController.h"
 
 
 @implementation CRTResponderImageView
 
 -(void)keyDown:(NSEvent *)event{
 	if(![[event characters] isEqualToString:@""]&&![event isARepeat]){
-		[[CRTAppController sharedAppController] userDidInputCharacters:[event characters]] ;
+		[[RRFCRTController sharedAppController] userDidInputCharacters:[event characters]] ;
 	}	
 }
 

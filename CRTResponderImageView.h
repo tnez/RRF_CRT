@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-@class CRTAppController;
+@class RRFCRTController;
 
 @interface CRTResponderImageView : NSImageView {
 
