@@ -9,6 +9,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 #import <Cocoa/Cocoa.h>
 #import <TKUtility/TKUtility.h>
+@class CRTTrial;
+@class CRTResponderImageView;
 
 @interface RRFCRTController : NSObject <TKComponentBundleLoading> {
 
@@ -21,7 +23,36 @@
 
   // ADDITIONAL MEMBERS ////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
-    
+	NSMutableArray * trials;
+	NSMutableArray * finishedTrials;
+	NSView * theWindow;
+	NSTextField * textField;
+	CRTResponderImageView * imageView;
+	NSInteger applicationState;
+	CRTTrial * currentTrial;
+  TKTime startMarker;
+  TKTime lastMarker;
+	NSUInteger trialBlocksCompleted;
+	NSUInteger totalTrialsThisRun;
+  /* defined parameters */
+  NSUInteger prepTimeMilliseconds;
+  NSUInteger blankScreenMilliseconds;
+  NSUInteger numberOfVerticalGreenRectangles;
+  NSUInteger numberOfHorizontalGreenRectangles;
+  NSUInteger numberOfVerticalBlueRectangles;
+  NSUInteger numberOfHorizontalBlueRectangles;
+  NSUInteger numberOf100msTrials;
+  NSUInteger numberOf200msTrials;
+  NSUInteger numberOf300msTrials;
+  NSUInteger numberOf400msTrials;
+  NSUInteger numberOf500msTrials;
+  NSUInteger maxTrialWaitTime;
+  NSUInteger resultDisplayTime;
+  NSUInteger numberOfTrialBlocks;
+  NSUInteger blockSize;
+  NSUInteger breakTime;
+  NSUInteger breakWarning;
+  NSUInteger responseTimeFilter;
 }
 
 // PROTOCOL PROPERTIES /////////////////////////////////////////////////////////
@@ -33,7 +64,15 @@
 
 // ADDITIONAL PROPERTIES ///////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-
+@property(nonatomic,retain) NSMutableArray * finishedTrials;
+@property(nonatomic,retain) CRTTrial * currentTrial;
+@property(nonatomic,retain) IBOutlet CRTResponderImageView * imageView;
+@property(nonatomic,retain) IBOutlet NSTextField * textField;
+@property(nonatomic,retain) IBOutlet NSView * theWindow;
+@property(nonatomic,retain) NSMutableArray * trials;
+@property(readwrite) NSUInteger trialBlocksCompleted;
+@property(readwrite) NSInteger applicationState;
+@property(readwrite) NSUInteger totalTrialsThisRun;
 
 #pragma mark REQUIRED PROTOCOL METHODS
 /**
@@ -101,7 +140,7 @@
 /**
  Run header if something other than default is required
  */
-//- (NSString *)runHeader;
+- (NSString *)runHeader;
 /**
  Session header if something other than default is required
  */
@@ -109,7 +148,11 @@
 /**
  Summary data if desired
  */
-//- (NSString *)summary;
+- (NSString *)summary;
+/**
+ Summary offset -- required if custom summary is used
+ */
+- (NSUInteger)summaryOffset;
 
 #pragma mark ADDITIONAL METHODS
 // PLACE ANY NON-PROTOCOL METHODS HERE
@@ -118,6 +161,30 @@
  Add the error to an ongoing error log
  */
 - (void)registerError: (NSString *)theError;
+/**
+ BEGIN: Scott's original methods
+ */
+//-(void) applicationDidFinishLaunching:(NSNotification *)aNotifications;
+//-(void) applicationWillFinishLaunching:(NSNotification *)aNotifications;
+//+(CRTAppController*) sharedAppController;
+-(void)userDidInputCharacters:(NSString*)characters;
+-(void)beginNextTrial:(NSNotification *)notification;
+-(void)layoutTrials;
+-(void)userTimeOut:(NSNotification *) notification;
+-(void)displayBlankScreenBeforeEmptyRectangle:(NSNotification *) notification;
+-(void)displayBlankRectangle:(NSNotification *) notification;
+-(void)displayFullRectangle:(NSNotification *) notification;
+-(void)showResults:(NSNotification *) notification;
+//-(void) terminate;
+-(void)beginBreak;
+-(void)giveBreakWarning:(NSNotification *)notification;
+//-(void)readStartupInfo;
+//-(BOOL)attemptCrashRecovery;
+//-(BOOL)setupNewRun;
+//-(void)logRunRawDataHeader;
+//-(void)logCurrentRunHeader;
+//-(NSString *) getCurrentRunHeader;
+//-(NSString *) mainHeaderString;
 
 #pragma mark Preference Keys
 // HERE YOU DEFINE KEY REFERENCES FOR ANY PREFERENCE VALUES
@@ -158,5 +225,15 @@ NSString * const RRFCRTMainNibNameKey;
 //  RRFCRTAnotherDescriptor       = 2
 // }; typedef NSInteger RRFCRTBlanketDescriptor;
 ////////////////////////////////////////////////////////////////////////////////
+enum appState {
+  CRTWaitingForUserToBegin=0,
+  CRTBreak=1,
+  CRTBreakTimeWarning=2,
+  CRTPrepTime=3,
+  CRTTransitionToEmptyRectangle=4,
+  CRTEmptyRectangle=5,
+  CRTDuringTrial=6,
+  CRTDisplayingResults=7
+};
 
 @end

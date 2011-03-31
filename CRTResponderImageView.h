@@ -10,7 +10,7 @@
 @class RRFCRTController;
 
 @interface CRTResponderImageView : NSImageView {
-
+  IBOutlet RRFCRTController *controller;
 }
-
+@property (assign) IBOutlet RRFCRTController *controller;
 @end

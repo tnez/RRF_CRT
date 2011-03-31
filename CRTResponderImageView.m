@@ -9,12 +9,13 @@
 #import "CRTResponderImageView.h"
 #import "RRFCRTController.h"
 
-
 @implementation CRTResponderImageView
+
+@synthesize controller;
 
 -(void)keyDown:(NSEvent *)event{
 	if(![[event characters] isEqualToString:@""]&&![event isARepeat]){
-		[[RRFCRTController sharedAppController] userDidInputCharacters:[event characters]] ;
+		[controller userDidInputCharacters:[event characters]] ;
 	}	
 }
 
