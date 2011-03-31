@@ -125,6 +125,22 @@
 ////////////////////////////////////////////////////////////////////////////////
 NSString * const RRFCRTTaskNameKey;
 NSString * const RRFCRTDataDirectoryKey;
+NSString * const RRFCRTPrepTimeMSKey;
+NSString * const RRFCRTBlankScreenTimeMSKey;
+NSString * const RRFCRTVertGreenRectCountKey;
+NSString * const RRFCRTVertBlueRectCountKey;
+NSString * const RRFCRTHorizGreenRectCountKey;
+NSString * const RRFCRTHorizBlueRectCountKey;
+NSString * const RRFCRT100TrialCountKey;
+NSString * const RRFCRT200TrialCountKey;
+NSString * const RRFCRT300TrialCountKey;
+NSString * const RRFCRT400TrialCountKey;
+NSString * const RRFCRT500TrialCountKey;
+NSString * const RRFCRTTrialBlockCountKey;
+NSString * const RRFCRTBlockSizeKey;
+NSString * const RRFCRTBreakTimeKey;
+NSString * const RRFCRTBreakWarningKey;
+NSString * const RRFCRTResponseTimeFilterMSKey;
 
 #pragma mark Internal Strings
 // HERE YOU DEFINE KEYS FOR CONSTANT STRINGS

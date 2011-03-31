@@ -46,6 +46,270 @@
 			<key>help</key>
 			<string>Directory where component will save data file - Initial value is set to session global</string>
 		</dict>
+		<dict>
+			<key>optionIdentifier</key>
+			<string>RRFCRTPrepTimeMS</string>
+			<key>displayName</key>
+			<string>Prep Time (ms)</string>
+			<key>type</key>
+			<string>1</string>
+			<key>default</key>
+			<integer>800</integer>
+			<key>allowsEdit</key>
+			<true/>
+			<key>allowsNull</key>
+			<false/>
+			<key>help</key>
+			<string>I don&apos;t really know...</string>
+			<key>min</key>
+			<integer>50</integer>
+		</dict>
+		<dict>
+			<key>optionIdentifier</key>
+			<string>RRFCRTBlankScreenTimeMS</string>
+			<key>displayName</key>
+			<string>Blank Screen Time (ms)</string>
+			<key>type</key>
+			<string>1</string>
+			<key>default</key>
+			<integer>500</integer>
+			<key>allowsEdit</key>
+			<true/>
+			<key>allowsNull</key>
+			<false/>
+			<key>help</key>
+			<string>Amount of time the screen is blank between one and two thing.</string>
+			<key>min</key>
+			<integer>50</integer>
+		</dict>
+		<dict>
+			<key>optionIdentifier</key>
+			<string>RRFCRTVertGreenRectCount</string>
+			<key>displayName</key>
+			<string>Vert Green Rect Count</string>
+			<key>type</key>
+			<string>1</string>
+			<key>default</key>
+			<integer>20</integer>
+			<key>allowsEdit</key>
+			<true/>
+			<key>allowsNull</key>
+			<false/>
+			<key>help</key>
+			<string>Number of vertical green rectangle instances</string>
+		</dict>
+		<dict>
+			<key>optionIdentifier</key>
+			<string>RRFCRTVertBlueRectCount</string>
+			<key>displayName</key>
+			<string>Vert Blue Rect Count</string>
+			<key>type</key>
+			<string>1</string>
+			<key>default</key>
+			<integer>5</integer>
+			<key>allowsEdit</key>
+			<true/>
+			<key>allowsNull</key>
+			<false/>
+			<key>help</key>
+			<string>Number of vertical blue rectangle instances</string>
+		</dict>
+		<dict>
+			<key>optionIdentifier</key>
+			<string>RRFCRTHorizGreenRectCount</string>
+			<key>displayName</key>
+			<string>Horiz Green Rect Count</string>
+			<key>type</key>
+			<string>1</string>
+			<key>default</key>
+			<integer>5</integer>
+			<key>allowsEdit</key>
+			<true/>
+			<key>allowsNull</key>
+			<false/>
+			<key>help</key>
+			<string>Number of horizontal green rectangle instances</string>
+		</dict>
+		<dict>
+			<key>optionIdentifier</key>
+			<string>RRFCRTHorizBlueRectCount</string>
+			<key>displayName</key>
+			<string>Horiz Blue Rect Count</string>
+			<key>type</key>
+			<string>1</string>
+			<key>default</key>
+			<integer>20</integer>
+			<key>allowsEdit</key>
+			<true/>
+			<key>allowsNull</key>
+			<false/>
+			<key>help</key>
+			<string>Number of horizontal blue rectangle instances</string>
+		</dict>
+		<dict>
+			<key>optionIdentifier</key>
+			<string>RRFCRT100TrialCount</string>
+			<key>displayName</key>
+			<string>100ms Trial Count</string>
+			<key>type</key>
+			<string>1</string>
+			<key>default</key>
+			<integer>10</integer>
+			<key>allowsEdit</key>
+			<true/>
+			<key>allowsNull</key>
+			<false/>
+			<key>help</key>
+			<string>Desired instances of 100ms trials</string>
+		</dict>
+		<dict>
+			<key>optionIdentifier</key>
+			<string>RRFCRT200TrialCount</string>
+			<key>displayName</key>
+			<string>200ms Trial Count</string>
+			<key>type</key>
+			<string>1</string>
+			<key>default</key>
+			<integer>10</integer>
+			<key>allowsEdit</key>
+			<true/>
+			<key>allowsNull</key>
+			<false/>
+			<key>help</key>
+			<string>Desired instances of 200ms trials</string>
+		</dict>
+		<dict>
+			<key>optionIdentifier</key>
+			<string>RRFCRT300TrialCount</string>
+			<key>displayName</key>
+			<string>300ms Trial Count</string>
+			<key>type</key>
+			<string>1</string>
+			<key>default</key>
+			<integer>10</integer>
+			<key>allowsEdit</key>
+			<true/>
+			<key>allowsNull</key>
+			<false/>
+			<key>help</key>
+			<string>Desired instances of 300ms trials</string>
+		</dict>
+		<dict>
+			<key>optionIdentifier</key>
+			<string>RRFCRT400TrialCount</string>
+			<key>displayName</key>
+			<string>400ms Trial Count</string>
+			<key>type</key>
+			<string>1</string>
+			<key>default</key>
+			<integer>10</integer>
+			<key>allowsEdit</key>
+			<true/>
+			<key>allowsNull</key>
+			<false/>
+			<key>help</key>
+			<string>Desired instances of 400ms trials</string>
+		</dict>
+		<dict>
+			<key>optionIdentifier</key>
+			<string>RRFCRT500TrialCount</string>
+			<key>displayName</key>
+			<string>500ms Trial Count</string>
+			<key>type</key>
+			<string>1</string>
+			<key>default</key>
+			<integer>10</integer>
+			<key>allowsEdit</key>
+			<true/>
+			<key>allowsNull</key>
+			<false/>
+			<key>help</key>
+			<string>Desired instances of 500ms trials</string>
+		</dict>
+		<dict>
+			<key>optionIdentifier</key>
+			<string>RRFCRTTrialBlockCount</string>
+			<key>displayName</key>
+			<string>Trial Blocks</string>
+			<key>type</key>
+			<string>1</string>
+			<key>default</key>
+			<integer>5</integer>
+			<key>allowsEdit</key>
+			<true/>
+			<key>allowsNull</key>
+			<false/>
+			<key>help</key>
+			<string>Desired instances of trial blocks</string>
+		</dict>
+		<dict>
+			<key>optionIdentifier</key>
+			<string>RRFCRTBlockSize</string>
+			<key>displayName</key>
+			<string>Block Size</string>
+			<key>type</key>
+			<string>1</string>
+			<key>default</key>
+			<integer>50</integer>
+			<key>allowsEdit</key>
+			<true/>
+			<key>allowsNull</key>
+			<false/>
+			<key>help</key>
+			<string>Desired instances of trials within a trial block</string>
+		</dict>
+		<dict>
+			<key>optionIdentifier</key>
+			<string>RRFCRTBreakTime</string>
+			<key>displayName</key>
+			<string>Break Time (s)</string>
+			<key>type</key>
+			<string>1</string>
+			<key>default</key>
+			<integer>30</integer>
+			<key>allowsEdit</key>
+			<true/>
+			<key>allowsNull</key>
+			<false/>
+			<key>help</key>
+			<string>Desired duration of break</string>
+		</dict>
+		<dict>
+			<key>optionIdentifier</key>
+			<string>RRFCRTBreakWarning</string>
+			<key>displayName</key>
+			<string>Break Warning (s)</string>
+			<key>type</key>
+			<string>1</string>
+			<key>default</key>
+			<integer>20</integer>
+			<key>allowsEdit</key>
+			<true/>
+			<key>allowsNull</key>
+			<false/>
+			<key>help</key>
+			<string>Desired amount of time before the break at which the warning should be displayed</string>
+		</dict>
+		<dict>
+			<key>optionIdentifier</key>
+			<string>RRFCRTResponseTimeFilterMS</string>
+			<key>displayName</key>
+			<string>Response Time Filter (ms)</string>
+			<key>type</key>
+			<string>1</string>
+			<key>default</key>
+			<integer>100</integer>
+			<key>allowsEdit</key>
+			<true/>
+			<key>New item</key>
+			<string></string>
+			<key>allowsNull</key>
+			<false/>
+			<key>help</key>
+			<string>???</string>
+			<key>min</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 </dict>
 </plist>

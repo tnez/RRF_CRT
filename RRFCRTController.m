@@ -177,6 +177,22 @@
 // ex: NSString * const RRFCRTNameOfPreferenceKey = @"RRFCRTNameOfPreference"
 NSString * const RRFCRTTaskNameKey = @"RRFCRTTaskName";
 NSString * const RRFCRTDataDirectoryKey = @"RRFCRTDataDirectory";
+NSString * const RRFCRTPrepTimeMSKey = @"RRFCRTPrepTimeMS";
+NSString * const RRFCRTBlankScreenTimeMSKey = @"RRFCRTBlankScreenTimeMS";
+NSString * const RRFCRTVertGreenRectCountKey = @"RRFCRTVertGreenRectCount";
+NSString * const RRFCRTVertBlueRectCountKey = @"RRFCRTVertBlueRectCount";
+NSString * const RRFCRTHorizGreenRectCountKey = @"RRFCRTHorizGreenRectCount";
+NSString * const RRFCRTHorizBlueRectCountKey = @"RRFCRTHorizBlueRectCount";
+NSString * const RRFCRT100TrialCountKey = @"RRFCRT100TrialCount";
+NSString * const RRFCRT200TrialCountKey = @"RRFCRT200TrialCount";
+NSString * const RRFCRT300TrialCountKey = @"RRFCRT300TrialCount";
+NSString * const RRFCRT400TrialCountKey = @"RRFCRT400TrialCount";
+NSString * const RRFCRT500TrialCountKey = @"RRFCRT500TrialCount";
+NSString * const RRFCRTTrialBlockCountKey = @"RRFCRTTrialBlockCount";
+NSString * const RRFCRTBlockSizeKey = @"RRFCRTBlockSize";
+NSString * const RRFCRTBreakTimeKey = @"RRFCRTBreakTime";
+NSString * const RRFCRTBreakWarningKey = @"RRFCRTBreakWarning";
+NSString * const RRFCRTResponseTimeFilterMSKey = @"RRFCRTResponseTimeFilterMS";
 
 #pragma mark Internal Strings
 // HERE YOU DEFINE KEYS FOR CONSTANT STRINGS //
