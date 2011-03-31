@@ -228,6 +228,42 @@
 		</dict>
 		<dict>
 			<key>optionIdentifier</key>
+			<string>RRFCRTMaxTrialWaitTimeMS</string>
+			<key>displayName</key>
+			<string>Trial Max Wait Time (ms)</string>
+			<key>type</key>
+			<string>1</string>
+			<key>default</key>
+			<integer>1000</integer>
+			<key>allowsEdit</key>
+			<true/>
+			<key>allowsNull</key>
+			<false/>
+			<key>help</key>
+			<string>Amount of time trial should wait for response before moving to next trial</string>
+			<key>min</key>
+			<integer>500</integer>
+		</dict>
+		<dict>
+			<key>optionIdentifier</key>
+			<string>RRFCRTResultDisplayTimeMS</string>
+			<key>displayName</key>
+			<string>Result Display Time (ms)</string>
+			<key>type</key>
+			<string>1</string>
+			<key>default</key>
+			<integer>700</integer>
+			<key>allowsEdit</key>
+			<true/>
+			<key>allowsNull</key>
+			<false/>
+			<key>help</key>
+			<string>Amount of time that the result should be displayed to the subject</string>
+			<key>min</key>
+			<integer>100</integer>
+		</dict>
+		<dict>
+			<key>optionIdentifier</key>
 			<string>RRFCRTTrialBlockCount</string>
 			<key>displayName</key>
 			<string>Trial Blocks</string>

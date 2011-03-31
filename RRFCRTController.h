@@ -136,6 +136,8 @@ NSString * const RRFCRT200TrialCountKey;
 NSString * const RRFCRT300TrialCountKey;
 NSString * const RRFCRT400TrialCountKey;
 NSString * const RRFCRT500TrialCountKey;
+NSString * const RRFCRTMaxTrialWaitTimeMSKey;
+NSString * const RRFCRTResultDisplayTimeMSKey;
 NSString * const RRFCRTTrialBlockCountKey;
 NSString * const RRFCRTBlockSizeKey;
 NSString * const RRFCRTBreakTimeKey;
