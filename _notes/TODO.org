@@ -1,0 +1,15 @@
+
+* I
+** Build and connect interface
+** Initialize all variables in setup method
+** Check what needs to be done in begin method
+
+* II
+** define recovery conditions
+** design recovery
+** define data requirements for recovery process
+** implement recovery
+
+* III
+** testing
+
