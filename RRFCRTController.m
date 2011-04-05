@@ -44,7 +44,7 @@
  Start the component - will receive this message from the component controller
  */
 - (void)begin {
-    
+
 }
 /**
  Return a string representation of the data directory
@@ -107,11 +107,50 @@
   [self setErrorLog:@""]; // clear the error log
   // WHAT NEEDS TO BE INITIALIZED BEFORE THIS COMPONENT CAN OPERATE?
   // ...
+  totalTrialsThisRun = 0;
+  finishedTrials = [[NSMutableArray alloc] init];
+  applicationState = CRTWaitingForUserToBegin;
+  trialBlocksCompleted = 0;
+  prepTimeMilliseconds = [[definition valueForKey:RRFCRTPrepTimeMSKey] unsignedIntegerValue];
+  blankScreenMilliseconds = [[definition valueForKey:RRFCRTBlankScreenTimeMSKey] unsignedIntegerValue];
+  numberOfVerticalGreenRectangles = [[definition valueForKey:RRFCRTVertGreenRectCountKey] unsignedIntegerValue];
+  numberOfHorizontalGreenRectangles = [[definition valueForKey:RRFCRTHorizGreenRectCountKey] unsignedIntegerValue];
+  numberOfVerticalBlueRectangles = [[definition valueForKey:RRFCRTVertBlueRectCountKey] unsignedIntegerValue];
+  numberOfHorizontalBlueRectangles = [[definition valueForKey:RRFCRTHorizBlueRectCountKey] unsignedIntegerValue];
+  numberOf100msTrials = [[definition valueForKey:RRFCRT100TrialCountKey] unsignedIntegerValue];
+  numberOf200msTrials = [[definition valueForKey:RRFCRT200TrialCountKey] unsignedIntegerValue];
+  numberOf300msTrials = [[definition valueForKey:RRFCRT300TrialCountKey] unsignedIntegerValue];
+  numberOf400msTrials = [[definition valueForKey:RRFCRT400TrialCountKey] unsignedIntegerValue];
+  numberOf500msTrials = [[definition valueForKey:RRFCRT500TrialCountKey] unsignedIntegerValue];
+  maxTrialWaitTime = [[definition valueForKey:RRFCRTMaxTrialWaitTimeMSKey] unsignedIntegerValue];
+  resultDisplayTime = [[definition valueForKey:RRFCRTResultDisplayTimeMSKey] unsignedIntegerValue];
+  numberOfTrialBlocks = [[definition valueForKey:RRFCRTTrialBlockCountKey] unsignedIntegerValue];
+  blockSize = [[definition valueForKey:RRFCRTBlockSizeKey] unsignedIntegerValue];
+  breakTime = [[definition valueForKey:RRFCRTBreakTimeKey] unsignedIntegerValue];
+  breakWarning = [[definition valueForKey:RRFCRTBreakWarningKey] unsignedIntegerValue];
+  responseTimeFilter = [[definition valueForKey:RRFCRTResponseTimeFilterMSKey] unsignedIntegerValue];
+	NSNotificationCenter * noteCenter=[NSNotificationCenter defaultCenter];
+	[noteCenter addObserver:self selector:@selector(displayBlankScreenBeforeEmptyRectangle:) name:@"displayBlankScreenBeforeEmptyRectangle" object:nil];
+	[noteCenter addObserver:self selector:@selector(displayBlankRectangle:) name:@"displayBlankRectangle" object:nil];
+	[noteCenter addObserver:self selector:@selector(displayFullRectangle:) name:@"displayFullRectangle" object:nil];
+	[noteCenter addObserver:self selector:@selector(userTimeOut:) name:@"userTimeOut" object:nil];
+	[noteCenter addObserver:self selector:@selector(beginNextTrial:) name:@"beginNextTrial" object:nil];
+  [noteCenter addObserver:self selector:@selector(giveBreakWarning:) name:@"giveBreakWarning" object:nil];
+  [self layoutTrials];
+  DLog(@"Trials Array: %@",trials);
   // LOAD NIB
   // ...
   if([NSBundle loadNibNamed:RRFCRTMainNibNameKey owner:self]) {
     // SETUP THE INTERFACE VALUES
     // ...
+		[textField setFont:[NSFont fontWithName:[[textField font] fontName] size:48]];	
+		[textField sizeToFit];
+		NSRect windowFrame = [view frame];
+		float textFieldWidth = ([textField frame]).size.width*4;
+		float textFieldHeight = ([textField frame]).size.height*4;	    
+		[textField setFrame:NSMakeRect(((windowFrame.size.width/2) - (textFieldWidth/2)),((windowFrame.size.height/2)-(textFieldHeight/2)),textFieldWidth,textFieldHeight)];
+		[textField setNeedsDisplay];
+		[[delegate sessionWindow] makeFirstResponder:imageView];    
   } else {
     // nib did not load, so throw error
     [self registerError:@"Could not load Nib file"];
@@ -130,15 +169,13 @@
   // any finalization should be done here:
   // ...
   // remove any temporary data files (uncomment below to use default)
-  /*
   NSError *tFileMoveError = nil;
-  [[NSFileManager defaultManager] removeItemAtPath:[delegate defaultTempFile]
+  [[NSFileManager defaultManager] removeItemAtPath:[[delegate tempDirectory] stringByAppendingPathComponent:[delegate defaultTempFile]]
                                              error:&tFileMoveError];
   if(tFileMoveError) {
     ELog(@"%@",[tFileMoveError localizedDescription]);
     [tFileMoveError release]; tFileMoveError=nil;
   }
-   */
   // de-register any possible notifications
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -314,7 +351,7 @@
 	}
 }
 -(void)beginNextTrial:(NSNotification *) notification{
-	[[view window] makeFirstResponder:imageView];
+	[[delegate sessionWindow] makeFirstResponder:imageView];
 	if([trials count] > 0){
 		currentTrial = [trials objectAtIndex:0];
 		[trials removeObjectAtIndex:0];
@@ -417,7 +454,7 @@
 	}
 }
 -(void)displayBlankScreenBeforeEmptyRectangle:(NSNotification *) notification{
-	[[view window] makeFirstResponder:imageView];
+	[[delegate sessionWindow] makeFirstResponder:imageView];
 	[self setApplicationState:CRTTransitionToEmptyRectangle];
 	[imageView setHidden:YES];
 	[textField setHidden:YES];
@@ -425,7 +462,7 @@
 	[[TKTimer appTimer] registerEventWithNotification:notificationToPost inSeconds:0 microSeconds:(blankScreenMilliseconds *1000)];
 }
 -(void)displayBlankRectangle:(NSNotification *)notification{
-	[[view window] makeFirstResponder:imageView];
+	[[delegate sessionWindow] makeFirstResponder:imageView];
 	[self setApplicationState:CRTEmptyRectangle];
 	if([currentTrial orientation] == CRTVerticalOrientation){
 		[imageView setImage:[NSImage imageNamed:@"verticalClear.PNG"]];
@@ -439,7 +476,7 @@
 	[[TKTimer appTimer] registerEventWithNotification:notificationToPost inSeconds:0 microSeconds:(1000*[currentTrial waitTimeMilliseconds])];
 }
 -(void)displayFullRectangle:(NSNotification *)notification{
-	[[view window] makeFirstResponder:imageView];
+	[[delegate sessionWindow] makeFirstResponder:imageView];
 	[self setApplicationState:CRTDuringTrial];
   lastMarker = new_time_marker(0,0);
   startMarker = current_time_marker();
@@ -456,7 +493,7 @@
 	[[TKTimer appTimer] registerEventWithNotification:notificationToPost inSeconds:0 microSeconds:(1000*maxTrialWaitTime)];
 }
 -(void)showResults:(NSNotification *) notification{
-	[[view window] makeFirstResponder:imageView];
+	[[delegate sessionWindow] makeFirstResponder:imageView];
 	[self setApplicationState:CRTDisplayingResults];
 	totalTrialsThisRun++;
 	NSInteger hit = 0;
