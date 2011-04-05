@@ -160,11 +160,12 @@
  */
 - (void)registerError: (NSString *)theError;
 /**
- BEGIN: Scott's original methods
+ At each milestone (break in this case) write data needed for recovery.
+ 
+ This will create an array in the registry with each of the trial objects archived and ready to be recovered if needed.
  */
-//-(void) applicationDidFinishLaunching:(NSNotification *)aNotifications;
-//-(void) applicationWillFinishLaunching:(NSNotification *)aNotifications;
-//+(CRTAppController*) sharedAppController;
+- (void)writeMilestoneDataToRegistry;
+/** Scott's Methods **/
 -(void)userDidInputCharacters:(NSString*)characters;
 -(void)beginNextTrial:(NSNotification *)notification;
 -(void)layoutTrials;
@@ -173,16 +174,8 @@
 -(void)displayBlankRectangle:(NSNotification *) notification;
 -(void)displayFullRectangle:(NSNotification *) notification;
 -(void)showResults:(NSNotification *) notification;
-//-(void) terminate;
 -(void)beginBreak;
 -(void)giveBreakWarning:(NSNotification *)notification;
-//-(void)readStartupInfo;
-//-(BOOL)attemptCrashRecovery;
-//-(BOOL)setupNewRun;
-//-(void)logRunRawDataHeader;
-//-(void)logCurrentRunHeader;
-//-(NSString *) getCurrentRunHeader;
-//-(NSString *) mainHeaderString;
 
 #pragma mark Preference Keys
 // HERE YOU DEFINE KEY REFERENCES FOR ANY PREFERENCE VALUES
@@ -209,10 +202,15 @@ NSString * const RRFCRTBreakTimeKey;
 NSString * const RRFCRTBreakWarningKey;
 NSString * const RRFCRTResponseTimeFilterMSKey;
 
+#pragma mark Regfile Keys
+NSString * const RRFCRTPreviousTrialsKey;
+NSString * const RRFCRTBlocksFinishedKey;
+
 #pragma mark Internal Strings
 // HERE YOU DEFINE KEYS FOR CONSTANT STRINGS
 ////////////////////////////////////////////////////////////////////////////////
 NSString * const RRFCRTMainNibNameKey;
+NSString * const RRFCRTHeapFileKey;
 
 #pragma mark Enumerated Values
 // HERE YOU CAN DEFINE ENUMERATED VALUES

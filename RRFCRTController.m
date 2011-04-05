@@ -12,6 +12,8 @@
 #import "CRTTrial.h"
 
 #define RRFLogToTemp(fmt, ...) [delegate logStringToDefaultTempFile:[NSString stringWithFormat:fmt,##__VA_ARGS__]]
+#define RRFLogToFile(filename,fmt, ...) [delegate logString:[NSString stringWithFormat:fmt,##__VA_ARGS__] toDirectory:[delegate tempDirectory] toFile:filename]
+#define RRFPathToTempFile(filename) [[delegate tempDirectory] stringByAppendingPathComponent:filename]
 
 @implementation RRFCRTController
 
@@ -37,6 +39,16 @@
   // any additional release calls go here
   // ...
   [super dealloc];
+}
+
+- (id)init {
+  if(self=[super init]) {
+    trialBlocksCompleted = 0;
+    totalTrialsThisRun = 0;
+    finishedTrials = [[NSMutableArray alloc] init];
+    return self;
+  }
+  return nil;
 }
 
 #pragma mark REQUIRED PROTOCOL METHODS
@@ -83,7 +95,21 @@
  as string
  */
 - (void)recover {
-  // if no recovery is needed, nothing need be done here
+  DLog(@"Beginning Recovery Process");
+  // get info from previous run
+  NSDictionary *ourTaskEntry = [delegate registryForTaskWithOffset:0];
+  NSDictionary *previousRun = [delegate registryForRunWithOffset:0 forTaskRegistry:ourTaskEntry];
+  NSData *archivedTrials = [previousRun valueForKey:RRFCRTPreviousTrialsKey];
+  if(archivedTrials) {
+    NSArray *unarchivedTrials = [NSKeyedUnarchiver unarchiveObjectWithData:archivedTrials];
+    [finishedTrials addObjectsFromArray:unarchivedTrials];
+    totalTrialsThisRun = [finishedTrials count];
+  }
+  trialBlocksCompleted = [[previousRun valueForKey:RRFCRTBlocksFinishedKey] unsignedIntegerValue];
+  // remove secondary temp^2 file, this is the raw data from last run
+  [[NSFileManager defaultManager] removeItemAtPath:RRFPathToTempFile(RRFCRTHeapFileKey) error:nil];
+  // then perform normal setup
+  [self setup];
 }
 /**
  Accept assignment for the component definition
@@ -107,10 +133,7 @@
   [self setErrorLog:@""]; // clear the error log
   // WHAT NEEDS TO BE INITIALIZED BEFORE THIS COMPONENT CAN OPERATE?
   // ...
-  totalTrialsThisRun = 0;
-  finishedTrials = [[NSMutableArray alloc] init];
   applicationState = CRTWaitingForUserToBegin;
-  trialBlocksCompleted = 0;
   prepTimeMilliseconds = [[definition valueForKey:RRFCRTPrepTimeMSKey] unsignedIntegerValue];
   blankScreenMilliseconds = [[definition valueForKey:RRFCRTBlankScreenTimeMSKey] unsignedIntegerValue];
   numberOfVerticalGreenRectangles = [[definition valueForKey:RRFCRTVertGreenRectCountKey] unsignedIntegerValue];
@@ -160,7 +183,9 @@
  Return YES if component should perform recovery actions
  */
 - (BOOL)shouldRecover {
-  return NO;  // this is the default; change if needed
+  // need to recover if we still have raw data sitting out there
+  NSFileManager *fm = [NSFileManager defaultManager];
+  return [fm fileExistsAtPath:RRFPathToTempFile([delegate defaultTempFile])];
 }
 /**
  Perform any and all finalization required by component
@@ -170,8 +195,8 @@
   // ...
   // remove any temporary data files (uncomment below to use default)
   NSError *tFileMoveError = nil;
-  [[NSFileManager defaultManager] removeItemAtPath:[[delegate tempDirectory] stringByAppendingPathComponent:[delegate defaultTempFile]]
-                                             error:&tFileMoveError];
+  [[NSFileManager defaultManager] removeItemAtPath:RRFPathToTempFile([delegate defaultTempFile]) error:&tFileMoveError];
+  [[NSFileManager defaultManager] removeItemAtPath:RRFPathToTempFile(RRFCRTHeapFileKey) error:&tFileMoveError];
   if(tFileMoveError) {
     ELog(@"%@",[tFileMoveError localizedDescription]);
     [tFileMoveError release]; tFileMoveError=nil;
@@ -337,6 +362,17 @@
   // append the new error to the error log
   [self setErrorLog:[[errorLog stringByAppendingString:theError] 
                      stringByAppendingString:@"\n"]];
+}
+
+- (void)writeMilestoneDataToRegistry {
+  // write heap file to default temp
+  NSString *heapContents = [NSString stringWithContentsOfFile:RRFPathToTempFile(RRFCRTHeapFileKey)];
+  [[TKLogging mainLogger] queueLogMessage:[delegate tempDirectory] file:[delegate defaultTempFile] contentsOfString:heapContents overWriteOnFirstWrite:NO];
+  // remove heap file
+  [[NSFileManager defaultManager] removeItemAtPath:RRFPathToTempFile(RRFCRTHeapFileKey) error:nil];
+  // write recovery data to regfile
+  [delegate setValue:[NSKeyedArchiver archivedDataWithRootObject:finishedTrials] forRunRegistryKey:RRFCRTPreviousTrialsKey];
+  [delegate setValue:[NSNumber numberWithUnsignedInteger:trialBlocksCompleted] forRunRegistryKey:RRFCRTBlocksFinishedKey];
 }
 
 /*******************************************************************************
@@ -551,16 +587,15 @@
 		}
 	}
 	[finishedTrials addObject:currentTrial];
-  DLog(@"Logging raw data to tempfile");
-  RRFLogToTemp(@"%d\t%d\t%d\t%d\t%d\t%@\t%03.2f\t%d\n",
-               totalTrialsThisRun,
-               hit,
-               miss,
-               correctMiss,
-               incorrectHit,
-               target,
-               responseTime,
-               delay);
+  RRFLogToFile(RRFCRTHeapFileKey,@"%d\t%d\t%d\t%d\t%d\t%@\t%03.2f\t%d\n",
+                totalTrialsThisRun,
+                hit,
+                miss,
+                correctMiss,
+                incorrectHit,
+                target,
+                responseTime,
+                delay);
 	NSNotification * notificationToPost = [NSNotification notificationWithName:@"beginNextTrial" object:self];
 	[[TKTimer appTimer] registerEventWithNotification:notificationToPost inSeconds:0 microSeconds:(resultDisplayTime * 1000)];
 	
@@ -573,8 +608,9 @@
 	
 	NSNotification * notificationToPost = [NSNotification  notificationWithName:@"giveBreakWarning" object:self];
 	[[TKTimer appTimer] registerEventWithNotification:notificationToPost inSeconds:breakWarning microSeconds:0];
-	
-	[self layoutTrials];
+
+	[self writeMilestoneDataToRegistry];  // record point for recovery
+	[self layoutTrials];                  // layout next set of trials
 }
 -(void)giveBreakWarning:(NSNotification *)notification{
 	[textField setStringValue:[NSString stringWithFormat:@"%d seconds remaining, get ready.",(breakTime-breakWarning)]];
@@ -608,9 +644,14 @@ NSString * const RRFCRTBreakTimeKey = @"RRFCRTBreakTime";
 NSString * const RRFCRTBreakWarningKey = @"RRFCRTBreakWarning";
 NSString * const RRFCRTResponseTimeFilterMSKey = @"RRFCRTResponseTimeFilterMS";
 
+#pragma mark Regfile Keys
+NSString * const RRFCRTPreviousTrialsKey = @"RRFCRTPreviousTrials";
+NSString * const RRFCRTBlocksFinishedKey = @"RRFCRTBlocksFinished";
+
 #pragma mark Internal Strings
 // HERE YOU DEFINE KEYS FOR CONSTANT STRINGS //
 ///////////////////////////////////////////////
 NSString * const RRFCRTMainNibNameKey = @"RRFCRTMainNib";
+NSString * const RRFCRTHeapFileKey = @"RRFCRTHeapFile";
         
 @end

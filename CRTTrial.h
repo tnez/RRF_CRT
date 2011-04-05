@@ -12,7 +12,7 @@
 #define CRTVerticalOrientation 0
 #define CRTHorizontalOrientation 1
 
-@interface CRTTrial : NSObject {
+@interface CRTTrial : NSObject <NSCoding> {
 	NSColor * color;
 	CRTOrientation orientation;
 	NSInteger waitTimeMilliseconds;
@@ -24,5 +24,6 @@
 @property(readwrite) NSInteger waitTimeMilliseconds;
 @property(readwrite) NSUInteger responseTimeMicroseconds;
 @property(readwrite) BOOL didHit;
-
+- (void)encodeWithCoder: (NSCoder *)decoder;
+- (id)initWithCoder: (NSCoder *)decoder;
 @end

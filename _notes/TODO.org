@@ -5,10 +5,10 @@
 ** DONE Check what needs to be done in begin method
 
 * II
-** define recovery conditions
-** design recovery
-** define data requirements for recovery process
-** implement recovery
+** DONE define recovery conditions
+** DONE design recovery
+** DONE define data requirements for recovery process
+** DONE implement recovery
 
 * III
 ** testing
