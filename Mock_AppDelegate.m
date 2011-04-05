@@ -16,6 +16,7 @@
 #import "TKComponentPathOption.h"
 #import "TKComponentEnumOption.h"
 #import "RRFCRTController.h"
+@class TKSession;
 
 /**
  Macros for logging functions conditional upon debug vs. production
@@ -178,7 +179,7 @@
     // setup component
     [component setSubject:subject];
     [component setSessionWindow:sessionWindow];
-    [component setDelegate:self];
+    [component setDelegate:(TKSession *)self];
 
     // test
     [self setErrorLog:[component preflightAndReturnErrorAsString]];
@@ -194,12 +195,12 @@
 
     // create component
     component = [[TKComponentController loadFromDefinition:componentDefinition] retain];
-    currentComponentID = [[componentDefinition valueForKey:RRFCRTTaskNameKey] retain];  
+    currentComponentID = [[componentDefinition valueForKey:@"RRFCRTTaskName"] retain];
   
     // setup component
     [component setSubject:subject];
     [component setSessionWindow:sessionWindow];
-    [component setDelegate:self];
+    [component setDelegate:(TKSession *)self];
     [[NSFileManager defaultManager] createDirectoryAtPath:[component tempDirectory] withIntermediateDirectories:YES attributes:nil error:nil];  
   
     // setup registry file
@@ -389,10 +390,10 @@
     [registry valueForKey:RRFSessionComponentsKey];
     // task ID and a nested runs mutable dictionary
     [compSection setValue:[NSMutableDictionary dictionary]
-                   forKey:[[component definition] valueForKey:@"RRFDSSTTaskName"]];
+                   forKey:[[component definition] valueForKey:@"RRFCRTTaskName"]];
     // create an empty run registry inside
     NSMutableDictionary *curSection=
-    [compSection valueForKey:[[component definition] valueForKey:@"RRFDSSTTaskName"]];
+    [compSection valueForKey:[[component definition] valueForKey:@"RRFCRTTaskName"]];
     [curSection setValue:[NSMutableArray array] forKey:RRFSessionRunKey];
     
     DLog(@"Created entries for all components in registry");
