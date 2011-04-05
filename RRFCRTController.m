@@ -23,7 +23,6 @@
 @synthesize finishedTrials;
 @synthesize imageView;
 @synthesize textField;
-@synthesize theWindow;
 @synthesize totalTrialsThisRun;
 @synthesize trialBlocksCompleted;
 @synthesize trials;
@@ -315,7 +314,7 @@
 	}
 }
 -(void)beginNextTrial:(NSNotification *) notification{
-	[[theWindow window] makeFirstResponder:imageView];
+	[[view window] makeFirstResponder:imageView];
 	if([trials count] > 0){
 		currentTrial = [trials objectAtIndex:0];
 		[trials removeObjectAtIndex:0];
@@ -418,7 +417,7 @@
 	}
 }
 -(void)displayBlankScreenBeforeEmptyRectangle:(NSNotification *) notification{
-	[[theWindow window] makeFirstResponder:imageView];
+	[[view window] makeFirstResponder:imageView];
 	[self setApplicationState:CRTTransitionToEmptyRectangle];
 	[imageView setHidden:YES];
 	[textField setHidden:YES];
@@ -426,7 +425,7 @@
 	[[TKTimer appTimer] registerEventWithNotification:notificationToPost inSeconds:0 microSeconds:(blankScreenMilliseconds *1000)];
 }
 -(void)displayBlankRectangle:(NSNotification *)notification{
-	[[theWindow window] makeFirstResponder:imageView];
+	[[view window] makeFirstResponder:imageView];
 	[self setApplicationState:CRTEmptyRectangle];
 	if([currentTrial orientation] == CRTVerticalOrientation){
 		[imageView setImage:[NSImage imageNamed:@"verticalClear.PNG"]];
@@ -440,7 +439,7 @@
 	[[TKTimer appTimer] registerEventWithNotification:notificationToPost inSeconds:0 microSeconds:(1000*[currentTrial waitTimeMilliseconds])];
 }
 -(void)displayFullRectangle:(NSNotification *)notification{
-	[[theWindow window] makeFirstResponder:imageView];
+	[[view window] makeFirstResponder:imageView];
 	[self setApplicationState:CRTDuringTrial];
   lastMarker = new_time_marker(0,0);
   startMarker = current_time_marker();
@@ -457,7 +456,7 @@
 	[[TKTimer appTimer] registerEventWithNotification:notificationToPost inSeconds:0 microSeconds:(1000*maxTrialWaitTime)];
 }
 -(void)showResults:(NSNotification *) notification{
-	[[theWindow window] makeFirstResponder:imageView];
+	[[view window] makeFirstResponder:imageView];
 	[self setApplicationState:CRTDisplayingResults];
 	totalTrialsThisRun++;
 	NSInteger hit = 0;

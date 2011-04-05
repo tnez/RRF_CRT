@@ -25,7 +25,6 @@
   //////////////////////////////////////////////////////////////////////////////
 	NSMutableArray * trials;
 	NSMutableArray * finishedTrials;
-	NSView * theWindow;
 	NSTextField * textField;
 	CRTResponderImageView * imageView;
 	NSInteger applicationState;
@@ -68,7 +67,6 @@
 @property(nonatomic,retain) CRTTrial * currentTrial;
 @property(nonatomic,retain) IBOutlet CRTResponderImageView * imageView;
 @property(nonatomic,retain) IBOutlet NSTextField * textField;
-@property(nonatomic,retain) IBOutlet NSView * theWindow;
 @property(nonatomic,retain) NSMutableArray * trials;
 @property(readwrite) NSUInteger trialBlocksCompleted;
 @property(readwrite) NSInteger applicationState;

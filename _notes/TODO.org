@@ -1,6 +1,6 @@
 
 * I
-** Build and connect interface
+** DONE Build and connect interface
 ** Initialize all variables in setup method
 ** Check what needs to be done in begin method
 
