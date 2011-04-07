@@ -53,9 +53,10 @@
 
 #pragma mark ACTIONS
 - (IBAction)createDefinition: (id)sender;
+- (IBAction)preflight: (id)sender;
 - (IBAction)run: (id)sender;
 - (IBAction)runWithSample: (id)sender;
-- (IBAction)preflight: (id)sender;
+- (IBAction)saveDefinitionToDisk: (id)sender;
 
 #pragma mark SESSION POSING
 /**

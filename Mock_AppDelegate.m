@@ -244,6 +244,29 @@
     }
 }
 
+- (IBAction)saveDefinitionToDisk: (id)sender
+{
+  // run a panel to select save location
+  NSSavePanel *panel = [NSSavePanel savePanel];
+  NSArray *fileTypes = [NSArray arrayWithObject:@"plist"];
+  [panel setAllowedFileTypes:fileTypes];
+  if([panel runModal])
+  {
+    DLog(@"We will save generated plist to disk");
+    [self createDefinition:self];
+    NSURL *_fileURL = [panel URL];
+    if(![componentDefinition writeToURL:_fileURL atomically:YES])
+    {
+      ELog(@"Could not write plist to disk");
+      [self setErrorLog:@"There was a problem writing the plist to disk"];
+    }
+  }
+  else
+  {
+    DLog(@"User did cancel save operation");
+  }
+}
+
 #pragma mark Notifications
 - (void)theComponentWillBegin: (NSNotification *)aNote {
 
