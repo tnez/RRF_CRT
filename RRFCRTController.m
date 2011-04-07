@@ -24,6 +24,7 @@
 @synthesize errorLog;
 @synthesize finishedTrials;
 @synthesize imageView;
+@synthesize storedImages;
 @synthesize textField;
 @synthesize totalTrialsThisRun;
 @synthesize trialBlocksCompleted;
@@ -35,7 +36,11 @@
  Give back any memory that may have been allocated by this bundle
  */
 - (void)dealloc {
-  [errorLog release];
+  [currentTrial release];currentTrial=nil;
+  [errorLog release];errorLog=nil;
+  [finishedTrials release];finishedTrials=nil;
+  [storedImages release];storedImages=nil;
+  [trials release];trials=nil;
   // any additional release calls go here
   // ...
   [super dealloc];
@@ -46,6 +51,7 @@
     trialBlocksCompleted = 0;
     totalTrialsThisRun = 0;
     finishedTrials = [[NSMutableArray alloc] init];
+    storedImages = [[NSMutableArray alloc] init];
     return self;
   }
   return nil;
@@ -159,6 +165,7 @@
 	[noteCenter addObserver:self selector:@selector(userTimeOut:) name:@"userTimeOut" object:nil];
 	[noteCenter addObserver:self selector:@selector(beginNextTrial:) name:@"beginNextTrial" object:nil];
   [noteCenter addObserver:self selector:@selector(giveBreakWarning:) name:@"giveBreakWarning" object:nil];
+  [self cacheImages];
   [self layoutTrials];
   DLog(@"Trials Array: %@",trials);
   // LOAD NIB
@@ -193,6 +200,8 @@
 - (void)tearDown {
   // any finalization should be done here:
   // ...
+  [self clearImagesFromCache];
+  [delegate setValue:nil forRunRegistryKey:RRFCRTPreviousTrialsKey];  // clear out previous trials data
   // remove any temporary data files (uncomment below to use default)
   NSError *tFileMoveError = nil;
   [[NSFileManager defaultManager] removeItemAtPath:RRFPathToTempFile([delegate defaultTempFile]) error:&tFileMoveError];
@@ -357,6 +366,38 @@
 }
 
 #pragma mark ADDITIONAL METHODS
+- (void)cacheImages
+{
+  // get my bundle instance
+  NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
+  DLog(@"This is my bundle: %@",thisBundle);
+  // get all image resources in our bundle
+  NSArray *myImagePaths = [thisBundle pathsForResourcesOfType:@"PNG" inDirectory:nil];
+  DLog(@"I found paths to these images: %@",myImagePaths);
+  // for every found image path
+  for(NSString *imgPath in myImagePaths)
+  {
+    // get the image file name
+    NSString *_filename = [imgPath lastPathComponent];
+    // create and cache the image
+    NSImage *_img = [[NSImage alloc] initWithContentsOfFile:imgPath];
+    [_img setName:_filename];
+    DLog(@"Setting name: %@ for image: %@",_filename,_img);
+    [storedImages addObject:_img];
+  }
+  DLog(@"I've done stored all these images: %@",storedImages);
+}
+
+- (void)clearImagesFromCache
+{
+  for(NSImage *_img in storedImages)
+  {
+    [_img setName:nil]; // explicitly remove from named cache
+    [storedImages removeObject:_img];
+    [_img release];_img=nil;
+  }
+}
+  
 /** Add additional methods required for operation */
 - (void)registerError: (NSString *)theError {
   // append the new error to the error log

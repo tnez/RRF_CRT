@@ -52,6 +52,7 @@
   NSUInteger breakTime;
   NSUInteger breakWarning;
   NSUInteger responseTimeFilter;
+  NSMutableArray *storedImages;
 }
 
 // PROTOCOL PROPERTIES /////////////////////////////////////////////////////////
@@ -71,6 +72,7 @@
 @property(readwrite) NSUInteger trialBlocksCompleted;
 @property(readwrite) NSInteger applicationState;
 @property(readwrite) NSUInteger totalTrialsThisRun;
+@property(nonatomic, retain) NSMutableArray *storedImages;
 
 #pragma mark REQUIRED PROTOCOL METHODS
 /**
@@ -155,6 +157,14 @@
 #pragma mark ADDITIONAL METHODS
 // PLACE ANY NON-PROTOCOL METHODS HERE
 //////////////////////////////////////
+/**
+ Initialize and cache image resources
+ */
+- (void)cacheImages;
+/**
+ Explicitly clear any cached image resources
+ */
+- (void)clearImagesFromCache;
 /**
  Add the error to an ongoing error log
  */
