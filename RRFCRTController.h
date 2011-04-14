@@ -215,6 +215,7 @@ NSString * const RRFCRTResponseTimeFilterMSKey;
 #pragma mark Regfile Keys
 NSString * const RRFCRTPreviousTrialsKey;
 NSString * const RRFCRTBlocksFinishedKey;
+NSString * const RRFCRTNeedsToRecoverKey;
 
 #pragma mark Internal Strings
 // HERE YOU DEFINE KEYS FOR CONSTANT STRINGS

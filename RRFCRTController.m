@@ -63,7 +63,8 @@
    Start the component - will receive this message from the component controller
 */
 - (void)begin {
-
+  // set our needs to recover flag
+  [delegate setValue:[NSNumber numberWithBool:YES] forRunRegistryKey:RRFCRTNeedsToRecoverKey];
 }
 /**
    Return a string representation of the data directory
@@ -191,11 +192,11 @@
    Return YES if component should perform recovery actions
 */
 - (BOOL)shouldRecover {
-  // need to recover if we still have raw data sitting out there
-  NSFileManager *fm = [NSFileManager defaultManager];
-  return ([fm fileExistsAtPath:RRFPathToTempFile([delegate defaultTempFile])] || 
-          [fm fileExistsAtPath:RRFPathToTempFile(RRFCRTHeapFileKey)]);
+  // get my last run registry if any
+  NSDictionary *lastRunRegistry = [delegate registryForRunWithOffset:0 forTaskRegistry:[delegate registryForTaskWithOffset:0]];
+  return [[lastRunRegistry valueForKey:RRFCRTNeedsToRecoverKey] boolValue];
 }
+
 /**
    Perform any and all finalization required by component
 */
@@ -206,6 +207,7 @@
   // clear out previous trial data from registry
   [delegate setValue:nil forRunRegistryKey:RRFCRTPreviousTrialsKey];
   [delegate setValue:nil forRunRegistryKey:RRFCRTBlocksFinishedKey];
+  [delegate setValue:nil forRunRegistryKey:RRFCRTNeedsToRecoverKey];
   // remove any temporary data files (uncomment below to use default)
   NSError *tFileMoveError = nil;
   [[NSFileManager defaultManager] removeItemAtPath:RRFPathToTempFile([delegate defaultTempFile]) error:&tFileMoveError];
@@ -693,6 +695,7 @@ NSString * const RRFCRTResponseTimeFilterMSKey = @"RRFCRTResponseTimeFilterMS";
 #pragma mark Regfile Keys
 NSString * const RRFCRTPreviousTrialsKey = @"RRFCRTPreviousTrials";
 NSString * const RRFCRTBlocksFinishedKey = @"RRFCRTBlocksFinished";
+NSString * const RRFCRTNeedsToRecoverKey = @"RRFCRTNeedsToRecover";
 
 #pragma mark Internal Strings
 // HERE YOU DEFINE KEYS FOR CONSTANT STRINGS //
