@@ -193,7 +193,8 @@
 - (BOOL)shouldRecover {
   // need to recover if we still have raw data sitting out there
   NSFileManager *fm = [NSFileManager defaultManager];
-  return [fm fileExistsAtPath:RRFPathToTempFile([delegate defaultTempFile])];
+  return ([fm fileExistsAtPath:RRFPathToTempFile([delegate defaultTempFile])] || 
+          [fm fileExistsAtPath:RRFPathToTempFile(RRFCRTHeapFileKey)]);
 }
 /**
    Perform any and all finalization required by component
