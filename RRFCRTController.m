@@ -203,7 +203,9 @@
   // any finalization should be done here:
   // ...
   [self clearImagesFromCache];
-  [delegate setValue:nil forRunRegistryKey:RRFCRTPreviousTrialsKey];  // clear out previous trials data
+  // clear out previous trial data from registry
+  [delegate setValue:nil forRunRegistryKey:RRFCRTPreviousTrialsKey];
+  [delegate setValue:nil forRunRegistryKey:RRFCRTBlocksFinishedKey];
   // remove any temporary data files (uncomment below to use default)
   NSError *tFileMoveError = nil;
   [[NSFileManager defaultManager] removeItemAtPath:RRFPathToTempFile([delegate defaultTempFile]) error:&tFileMoveError];
