@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		400C9633134E2B6A009707D0 /* RRFCRT.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D5B49B6048680CD000E48DA /* RRFCRT.bundle */; };
 		401F076C1254F8FB00E31086 /* TKComponentConfigurationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 404B5EBF1250B59C00437416 /* TKComponentConfigurationView.m */; };
 		401F076D1254F8FB00E31086 /* TKComponentOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 404B5EC11250B59C00437416 /* TKComponentOption.m */; };
 		401F076E1254F8FB00E31086 /* TKComponentStringOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 404B5EC31250B59C00437416 /* TKComponentStringOption.m */; };
@@ -62,16 +61,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		400C9649134E2B81009707D0 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "~/Documents/development/rrf/PLUGINS";
-			dstSubfolderSpec = 0;
-			files = (
-				400C9633134E2B6A009707D0 /* RRFCRT.bundle in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		401F07981254F9DA00E31086 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -325,7 +314,6 @@
 				8D5B49B1048680CD000E48DA /* Sources */,
 				8D5B49B3048680CD000E48DA /* Frameworks */,
 				8D5B49AF048680CD000E48DA /* Resources */,
-				400C9649134E2B81009707D0 /* CopyFiles */,
 			);
 			buildRules = (
 			);
