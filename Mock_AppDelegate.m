@@ -243,9 +243,7 @@
         // ...
     }
 }
-
-- (IBAction)saveDefinitionToDisk: (id)sender
-{
+- (IBAction)saveDefinitionToDisk: (id)sender {
   // run a panel to select save location
   NSSavePanel *panel = [NSSavePanel savePanel];
   NSArray *fileTypes = [NSArray arrayWithObject:@"plist"];
